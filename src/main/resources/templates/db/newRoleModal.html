@@ -1,0 +1,31 @@
+<div class="col-xl-8 col-lg-7">
+	<div class="newRoleForm">
+		<form th:action="@{/db/role/create}" th:method="post">
+			<div class="modal fade" id="newRoleModal" tabindex="-1" role="dialog"
+				aria-labelledby="newRoleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h5 class="modal-title" id="newRoleModalLabel">New Role</h5>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label for="name">Name:</label> <input value="" type="text"
+									class="form-control" id="name" name="name"/>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+							<input type="submit" class="btn btn-primary" value="save"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

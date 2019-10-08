@@ -1,0 +1,16 @@
+<th:block layout:decorate="~{layout/bootstraplayout}" layout:fragment="content">
+
+    <!-- Page Content -->
+   <div class="container" id="errorPage">
+	
+	    <div class="starter-template">
+	        <h1>403 - Access is denied</h1>
+	        <div th:inline="text">Hello '[[${#httpServletRequest.remoteUser}]]', you do not have permission to access this page.</div>
+	    </div>
+	
+	</div>
+	<!-- /.container -->
+
+    
+</th:block>
+

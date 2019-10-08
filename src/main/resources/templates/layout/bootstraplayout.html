@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+	<head>
+		<!-- Header -->
+		<th:block th:replace="layout/partials/head"></th:block>
+	</head>
+	
+	<body>
+		<!-- Navbar -->
+		<th:block th:replace="layout/partials/nav"></th:block>
+		
+		<!-- Page content -->
+		<div layout:fragment="content"/>
+		<!-- /.container -->
+		
+		<!-- Footer -->
+		<th:block th:replace="layout/partials/footer"></th:block>
+	</body>
+
+</html>

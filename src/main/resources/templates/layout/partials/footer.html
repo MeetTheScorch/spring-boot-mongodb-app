@@ -1,0 +1,57 @@
+<!-- Bootstrap Core JavaScript -->
+<script th:src="@{/js/jquery/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+
+<!-- New Role modal -->
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.newRoleBtn').on('click', function(event) {
+			$('.newRoleForm #name').val('');
+
+			$('.newRoleForm #newRoleModal').modal();
+		});
+	});
+</script>
+
+<!-- Edit Role modal-->
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.editRoleBtn').on('click', function(event) {
+			event.preventDefault();
+			var href = $(this).attr('href');
+			var roleid;
+			
+			$.get(href, function(role) {
+				$('.editRoleForm #id').val(role.id);
+				$('.editRoleForm #name').val(role.name);
+				roleid = role.id;
+			});
+			
+			$("#inputId").html(roleid);
+			
+			$('.editRoleForm #editRoleModal').modal();
+		});
+	});
+</script>
+
+<!-- Edit User modal-->
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.editUserBtn').on('click', function(event) {
+			event.preventDefault();
+			var href = $(this).attr('href');
+			
+			$.get(href, function(user) {
+				$('.editUserForm #id').val(user.id);
+				$('.editUserForm #username').val(user.username);
+				$('.editUserForm #email').val(user.email);
+				$('.editUserForm #password').val(user.password);
+				$('.editUserForm #roles').val(user.roles);
+			});
+			
+			$('.editUserForm #editUserModal').modal();
+		});
+	});
+</script>
+
+
