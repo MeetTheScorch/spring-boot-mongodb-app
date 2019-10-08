@@ -18,20 +18,25 @@ public class User {
 	private String email;
 
 	private String password;
-
+	
 	@Transient
 	private String passwordConfirm;
+	
+	@Transient
+	private String passwordOld;
 
 	private List<Role> roles;
 
 	public User() {
 	}
 
-	public User(String username, String email, String password, String passwordConfirm, List<Role> roles) {
+	public User(String username, String email, String password, String passwordConfirm,
+			String passwordOld, List<Role> roles) {
 		super();
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.passwordOld = passwordOld;
 		this.passwordConfirm = passwordConfirm;
 		this.roles = roles;
 	}
@@ -75,6 +80,14 @@ public class User {
 	public void setPasswordConfirm(String passwordConfirm) {
 		this.passwordConfirm = passwordConfirm;
 	}
+	
+	public String getPasswordOld() {
+		return passwordOld;
+	}
+
+	public void setPasswordOld(String passwordOld) {
+		this.passwordOld = passwordOld;
+	}
 
 	public List<Role> getRoles() {
 		return roles;
@@ -97,7 +110,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User{" + "id=" + id + ", username=" + username + ", email=" + email + ", roles=" + rolesToString()
-				+ "}";
+				+ ", pass=" + password + ", cpass=" + passwordConfirm + ", opass=" + passwordOld + "}";
 	}
 
 	public static Comparator<User> nameComparator = new Comparator<User>() {

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import webapp.model.User;
 import webapp.service.SecurityService;
 import webapp.service.UserService;
-import webapp.validator.UserValidator;
+import webapp.validator.CreateUserValidator;
 
 @Controller
 public class AuthController {
@@ -23,7 +23,7 @@ public class AuthController {
 	private SecurityService securityService;
 	
 	@Autowired
-	private UserValidator userValidator;
+	private CreateUserValidator userValidator;
 	
 	@GetMapping("/registration")
 	public String registration(Model model) {
@@ -36,15 +36,9 @@ public class AuthController {
 		userValidator.validate(userForm, bindingResult);
 		
 		if(bindingResult.hasErrors()) {
-			System.out.println("errors mate");
-			System.out.println(bindingResult.toString());
 			return "registration";
 		}
-		
-		userService.create(userForm);
-		
-		System.out.println("Username: " + userForm.getUsername() + ", email: " + userForm.getEmail() + ", password: " + userForm.getPassword() + ", passwordConfirm: " + userForm.getPasswordConfirm());
-		
+		userService.create(userForm);		
 		securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
 		
 		return "redirect:/";

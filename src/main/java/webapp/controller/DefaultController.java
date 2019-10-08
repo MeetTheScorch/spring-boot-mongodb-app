@@ -22,11 +22,6 @@ public class DefaultController {
         return "admin";
     }
 	
-	@RequestMapping(value = "/profile")
-	public String profile() {
-		return "profile";
-	}
-	
 	@RequestMapping("/403")
 	public String error403() {
 		return "/error/403";

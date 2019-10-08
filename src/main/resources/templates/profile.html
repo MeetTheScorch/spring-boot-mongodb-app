@@ -5,8 +5,50 @@
 	<div class="container" id="homePage">
 		<div class="row">
 			<div class="col-lg-12">
-				<h2>Profile</h2>
+				<h2>Profile details</h2>
+				<div>
+					<h4>
+						Username: <span th:text="${name}" />
+					</h4>
+					<h4>
+						Email: <span th:text="${email}" />
+					</h4>
+				</div>
+			</div>
 
+			<div class="col-lg-12">
+				<form action="#" th:action="@{/profile}" th:object="${userForm}"
+					method="post">
+					<h3>Change your password:</h3>
+					<div>
+						<label>Current password</label> <input name="currentPassword"
+							th:field="*{passwordOld}" type="password" class="form-control"
+							placeholder="enter your current password" style="width: 300px;" />
+						<span class="error" th:if="${#fields.hasErrors('passwordOld')}"
+							th:errors="*{passwordOld}">Old password error</span>
+					</div>
+					&nbsp
+					<div>
+						<label>New password</label> <input name="newPassword"
+							th:field="*{password}" type="password" class="form-control"
+							placeholder="enter new password" style="width: 300px;" /> <span
+							class="error" th:if="${#fields.hasErrors('password')}"
+							th:errors="*{password}">Password error</span>
+					</div>
+					<div>
+						<label>Confirm new password</label> <input
+							name="confirmNewPassword" th:field="*{passwordConfirm}"
+							type="password" class="form-control"
+							placeholder="confirm new password" style="width: 300px;" /> <span
+							class="error" th:if="${#fields.hasErrors('passwordConfirm')}"
+							th:errors="*{passwordConfirm}">Confirm password error</span>
+					</div>
+					&nbsp
+					<button class="btn btn-primary" type="submit">Save changes</button>
+				</form>
+			</div>
+
+			<div class="col-lg-12">
 				<span sec:authorize="isAuthenticated()">Logged user: <span
 					sec:authentication="name"></span> | Roles: <span
 					sec:authentication="principal.authorities"></span>

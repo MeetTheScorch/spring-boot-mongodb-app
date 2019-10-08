@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import webapp.model.Role;
@@ -27,7 +27,7 @@ public class DbPageController {
 	@Autowired
 	UserService userService;
 	
-	@RequestMapping(value="/db", method=RequestMethod.GET)
+	@GetMapping(value="/db")
     public String dbPage(Model model) {
 		
 		List<Role> rolesList = roleService.findAll();
@@ -43,26 +43,26 @@ public class DbPageController {
 	
 	//Role
 	
-	@RequestMapping(path = "/db/role/create", method = RequestMethod.POST)
+	@PostMapping(path = "/db/role/create")
 	public String createRole(Role role) {
 		@SuppressWarnings("unused")
 		Role newRole = roleService.create(role);
 		return "redirect:/db";
 	}
 	
-	@RequestMapping(path = "/db/role/find/{id}", method=RequestMethod.GET)
+	@GetMapping(path = "/db/role/find/{id}")
 	@ResponseBody
 	public Role findRole(@PathVariable("id") String id) {
 		return roleService.findById(id);
 	}
 	
-	@RequestMapping(path = "/db/role/update", method = RequestMethod.POST)
+	@PostMapping(path = "/db/role/update")
     public String updateRoleWithModal(Role role) {
 		roleService.update(role);
         return "redirect:/db";
     }
 
-	@RequestMapping(path = "/db/role/delete/{id}", method = RequestMethod.GET)
+	@GetMapping(path = "/db/role/delete/{id}")
 	public String deleteRole(@PathVariable("id") String id, HttpServletRequest request) {
 		roleService.deleteById(id);
 		return "redirect:/db";
@@ -70,19 +70,19 @@ public class DbPageController {
 	
 	//User
 	
-	@RequestMapping(path = "/db/user/find/{id}", method=RequestMethod.GET)
+	@GetMapping(path = "/db/user/find/{id}")
 	@ResponseBody
 	public User findUser(@PathVariable("id") String id) {
 		return userService.findById(id);
 	}
 	
-	@RequestMapping(path = "/db/user/update", method = RequestMethod.POST)
+	@PostMapping(path = "/db/user/update")
     public String updateUserWithModal(User user) {
 		userService.update(user);
         return "redirect:/db";
     }
 	
-	@RequestMapping(path = "/db/user/delete/{id}", method = RequestMethod.GET)
+	@GetMapping(path = "/db/user/delete/{id}")
 	public String deleteUser(@PathVariable("id") String id, HttpServletRequest request) {
 		userService.deleteById(id);
 		return "redirect:/db";
