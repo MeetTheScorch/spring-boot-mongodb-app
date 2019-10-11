@@ -11,7 +11,7 @@ import webapp.model.User;
 import webapp.service.UserService;
 
 @Component
-public class UpdateUserValidator implements Validator {
+public class ProfileUpdateValidator implements Validator {
 	
 	@Autowired
 	private UserService userService;
@@ -28,11 +28,12 @@ public class UpdateUserValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		User newUser = (User) target;
 		
+		//check if user entered correct old password
 		if(!bCryptPasswordEncoder.matches(newUser.getPasswordOld(), userService.findByUsername(newUser.getUsername()).getPassword())) {
 			errors.rejectValue("passwordOld", "Diff.userForm.passwordOld");
 		}
 		
-		//test whether new password is different from old one
+		//check if new password is different from old one
 		if(bCryptPasswordEncoder.matches(newUser.getPassword(), userService.findByUsername(newUser.getUsername()).getPassword()) ) {
 			errors.rejectValue("password", "Diff.userForm.password");
 		}
@@ -45,20 +46,6 @@ public class UpdateUserValidator implements Validator {
 		if(!newUser.getPasswordConfirm().equals(newUser.getPassword())) {
 			errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
 		}
-		/*
-		 * ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
-		if(user.getUsername().length() < 4 || user.getUsername().length() > 32) {
-			errors.rejectValue("username", "Size.userForm.username");
-		}
-		if(userService.findByUsername(user.getUsername()) != null) {
-			errors.rejectValue("username", "Duplicate.userForm.username");
-		}
-		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty");
-		if(userService.findByEmail(user.getEmail()) != null) {
-			errors.rejectValue("email", "Duplicate.userForm.email");
-		}
-		*/
 	}
 
 }

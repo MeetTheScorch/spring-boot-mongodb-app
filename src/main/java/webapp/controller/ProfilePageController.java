@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import webapp.model.User;
 import webapp.service.UserService;
-import webapp.validator.UpdateUserValidator;
+import webapp.validator.ProfileUpdateValidator;
 
 @Controller
 public class ProfilePageController {
@@ -20,7 +20,7 @@ public class ProfilePageController {
 	UserService userService;
 	
 	@Autowired
-	private UpdateUserValidator userValidator;
+	private ProfileUpdateValidator profileUpdateValidator;
 
 	@GetMapping(value = "/profile")
 	public String profile(Model model, Authentication authentication, String error) {
@@ -45,22 +45,15 @@ public class ProfilePageController {
 		userForm.setId(currentUser.getId());
 		userForm.setUsername(currentUser.getUsername());
 		userForm.setRoles(currentUser.getRoles());
-		
-		if(userForm.getEmail() == null) {
-			userForm.setEmail(currentUser.getEmail());
-		}
-		
-		if(userForm.getPassword() == null) {
-			userForm.setEmail(currentUser.getPassword());
-		}
+		userForm.setEmail(currentUser.getEmail());
 
-		userValidator.validate(userForm, bindingResult);
+		profileUpdateValidator.validate(userForm, bindingResult);
 		
 		if(bindingResult.hasErrors()) {
 			return "profile";
 		}
 
-		userService.update(userForm);
+		userService.updatePassword(userForm);
 		
 		return "profile";
 	}

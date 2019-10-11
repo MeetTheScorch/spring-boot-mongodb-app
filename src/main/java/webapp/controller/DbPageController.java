@@ -70,6 +70,13 @@ public class DbPageController {
 	
 	//User
 	
+	@PostMapping(path = "/db/user/create")
+	public String createUser(User user) {
+		@SuppressWarnings("unused")
+		User newUser = userService.create(user);
+		return "redirect:/db";
+	}
+	
 	@GetMapping(path = "/db/user/find/{id}")
 	@ResponseBody
 	public User findUser(@PathVariable("id") String id) {

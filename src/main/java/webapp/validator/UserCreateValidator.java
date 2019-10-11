@@ -11,7 +11,7 @@ import webapp.model.User;
 import webapp.service.UserService;
 
 @Component
-public class CreateUserValidator implements Validator{
+public class UserCreateValidator implements Validator{
 
 	@Autowired
 	private UserService userService;

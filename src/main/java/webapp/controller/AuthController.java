@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import webapp.model.User;
 import webapp.service.SecurityService;
 import webapp.service.UserService;
-import webapp.validator.CreateUserValidator;
+import webapp.validator.UserCreateValidator;
 
 @Controller
 public class AuthController {
@@ -23,7 +23,7 @@ public class AuthController {
 	private SecurityService securityService;
 	
 	@Autowired
-	private CreateUserValidator userValidator;
+	private UserCreateValidator userCreateValidator;
 	
 	@GetMapping("/registration")
 	public String registration(Model model) {
@@ -33,7 +33,7 @@ public class AuthController {
 	
 	@PostMapping("/registration")
 	public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
-		userValidator.validate(userForm, bindingResult);
+		userCreateValidator.validate(userForm, bindingResult);
 		
 		if(bindingResult.hasErrors()) {
 			return "registration";

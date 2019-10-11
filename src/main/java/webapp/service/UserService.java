@@ -18,6 +18,8 @@ public interface UserService {
 	
 	User update(User user);
 	
+	User updatePassword(User user);
+	
 	void delete(User user);
 	
 	void deleteById(String id);

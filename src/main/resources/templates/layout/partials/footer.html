@@ -1,3 +1,11 @@
+<div>
+	<span sec:authorize="isAuthenticated()">Logged user: <span
+		sec:authentication="name"></span> | Roles: <span
+		sec:authentication="principal.authorities"></span>
+	</span>
+</div>
+
+
 <!-- Bootstrap Core JavaScript -->
 <script th:src="@{/js/jquery/jquery.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
@@ -19,17 +27,26 @@
 		$('.editRoleBtn').on('click', function(event) {
 			event.preventDefault();
 			var href = $(this).attr('href');
-			var roleid;
 			
 			$.get(href, function(role) {
 				$('.editRoleForm #id').val(role.id);
 				$('.editRoleForm #name').val(role.name);
-				roleid = role.id;
 			});
 			
-			$("#inputId").html(roleid);
-			
 			$('.editRoleForm #editRoleModal').modal();
+		});
+	});
+</script>
+
+<!-- New User modal -->
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.newUserBtn').on('click', function(event) {
+			$('.newUserForm #username').val('');
+			$('.newUserForm #email').val('');
+			$('.newUserForm #password').val('');
+
+			$('.newUserForm #newUserModal').modal();
 		});
 	});
 </script>
@@ -45,8 +62,6 @@
 				$('.editUserForm #id').val(user.id);
 				$('.editUserForm #username').val(user.username);
 				$('.editUserForm #email').val(user.email);
-				$('.editUserForm #password').val(user.password);
-				$('.editUserForm #roles').val(user.roles);
 			});
 			
 			$('.editUserForm #editUserModal').modal();

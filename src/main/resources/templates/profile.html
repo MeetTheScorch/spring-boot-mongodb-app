@@ -47,13 +47,6 @@
 					<button class="btn btn-primary" type="submit">Save changes</button>
 				</form>
 			</div>
-
-			<div class="col-lg-12">
-				<span sec:authorize="isAuthenticated()">Logged user: <span
-					sec:authentication="name"></span> | Roles: <span
-					sec:authentication="principal.authorities"></span>
-				</span>
-			</div>
 		</div>
 	</div>
 	<!-- /.container -->
