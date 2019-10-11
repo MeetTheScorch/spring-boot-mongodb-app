@@ -6,67 +6,9 @@
 </div>
 
 
+<!-- JQuery -->
+<script th:src="@{https://code.jquery.com/jquery-3.4.1.js}" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
 <!-- Bootstrap Core JavaScript -->
-<script th:src="@{/js/jquery/jquery.min.js}"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
-
-<!-- New Role modal -->
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('.newRoleBtn').on('click', function(event) {
-			$('.newRoleForm #name').val('');
-
-			$('.newRoleForm #newRoleModal').modal();
-		});
-	});
-</script>
-
-<!-- Edit Role modal-->
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('.editRoleBtn').on('click', function(event) {
-			event.preventDefault();
-			var href = $(this).attr('href');
-			
-			$.get(href, function(role) {
-				$('.editRoleForm #id').val(role.id);
-				$('.editRoleForm #name').val(role.name);
-			});
-			
-			$('.editRoleForm #editRoleModal').modal();
-		});
-	});
-</script>
-
-<!-- New User modal -->
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('.newUserBtn').on('click', function(event) {
-			$('.newUserForm #username').val('');
-			$('.newUserForm #email').val('');
-			$('.newUserForm #password').val('');
-
-			$('.newUserForm #newUserModal').modal();
-		});
-	});
-</script>
-
-<!-- Edit User modal-->
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('.editUserBtn').on('click', function(event) {
-			event.preventDefault();
-			var href = $(this).attr('href');
-			
-			$.get(href, function(user) {
-				$('.editUserForm #id').val(user.id);
-				$('.editUserForm #username').val(user.username);
-				$('.editUserForm #email').val(user.email);
-			});
-			
-			$('.editUserForm #editUserModal').modal();
-		});
-	});
-</script>
-
+<script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js}" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 

@@ -15,11 +15,10 @@ body {
 .navbar-fixed-top .navbar-brand {
     padding: 0 15px;
     color: white;
-    width: 200px;
     margin-top: 15px;
 }
 
-#NoEnrollments, #addStudentError, #error, #success{
+#NoEnrollments, #error, #success{
 	display: none;
 }
 
