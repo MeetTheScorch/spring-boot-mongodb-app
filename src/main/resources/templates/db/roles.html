@@ -1,0 +1,60 @@
+<th:block layout:decorate="~{layout/bootstraplayout}"
+	layout:fragment="content">
+
+	<!-- Page Content -->
+	<div class="container" id="dbRolesPage">
+		<div class="row">
+			<div class="col-lg-8">
+				<h2>Roles</h2>
+
+				<div class="row">
+					<div class="col">
+						<div style="margin-bottom: 20px;">
+							<button type="button" class="btn btn-primary newRoleBtn"
+								data-target="#newRoleModal">Add New Role</button>
+						</div>
+					</div>
+				</div>
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Id</th>
+							<th scope="col">Name</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:if="${roles.isEmpty()}">
+							<td colspan="2">No roles.</td>
+						</tr>
+						<tr th:if="${!roles.isEmpty()}" th:each="role : ${roles}">
+						<!--tr th:if="${!roles.isEmpty()}" th:each="role : ${roles}" class="editRoleBtn" 
+							th:href="@{/db/roles/find/{id}(id=${role.getId()})}"-->
+							<td th:text="${role.getId()}"></td>
+							<td th:text="${role.getName()}"></td>
+							<td><a class="editRoleBtn"
+								th:href="@{/db/roles/find/{id}(id=${role.getId()})}">Edit</a></td>
+							<td><a class="deleteRoleBtn"
+								th:href="@{/db/roles/delete/{id}(id=${role.getId()})}">Delete</a></td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+			
+			<div class="row">
+				<th:block th:include="db/newRoleModal"></th:block>
+			</div>
+			<div class="row">
+				<th:block th:include="db/editRoleModal"></th:block>
+			</div>
+		</div>
+	</div>
+	<!-- /.container -->
+
+
+</th:block>
+
+

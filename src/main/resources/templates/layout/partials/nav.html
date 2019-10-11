@@ -16,20 +16,21 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a th:href="@{/user}">User Page</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/admin}">Admin Page</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/db}">Database</a>
-                    </li>
-                    
-                </ul>
-                
-                <ul class="nav navbar-nav navbar-right">
+			<ul class="nav navbar-nav">
+				<li><a th:href="@{/user}">User Page</a></li>
+				<li><a th:href="@{/admin}">Admin Page</a></li>
+				<li>
+					<div class="dropdown">
+						<button class="dropbtn">Database</button>
+						<div class="dropdown-content">
+							<a th:href="@{/db/roles}">Roles</a>
+							<a th:href="@{/db/users}">Users</a>
+						</div>
+					</div>
+				</li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
                 	<!-- Profile -->
                 	<li sec:authorize="isFullyAuthenticated()">
                         <a th:href="@{/profile}">Profile</a>
