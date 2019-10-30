@@ -7,7 +7,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import webapp.model.User;
+import webapp.model.UserJPA;
 import webapp.service.UserService;
 
 @Component
@@ -21,12 +21,12 @@ public class ProfileUpdateValidator implements Validator {
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return User.class.equals(clazz);
+		return UserJPA.class.equals(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		User newUser = (User) target;
+		UserJPA newUser = (UserJPA) target;
 		
 		//check if user entered correct old password
 		if(!bCryptPasswordEncoder.matches(newUser.getPasswordOld(), userService.findByUsername(newUser.getUsername()).getPassword())) {

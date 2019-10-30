@@ -1,38 +1,15 @@
 package webapp.model;
 
+import java.math.BigInteger;
 import java.util.Comparator;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+public interface Role {
 
-@Document(collection = "role")
-public class Role {
+	BigInteger getId();
+	void setId(BigInteger id);
 
-	@Id
-	private String id;
-	
-	private String name;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	@Override
-	public String toString() {
-		return "Role{" + "id=" + id + ", name=" + name + "}";
-	}
+	String getName();
+	void setName(String name);
 	
 	public static Comparator<Role> nameComparator = new Comparator<Role>() {
 		public int compare(Role r1, Role r2) {

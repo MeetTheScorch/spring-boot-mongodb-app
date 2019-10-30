@@ -13,23 +13,28 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import webapp.model.Role;
+import webapp.model.RoleJPA;
+import webapp.model.RoleMongo;
 import webapp.model.User;
-import webapp.repository.UserRepository;
+import webapp.model.UserJPA;
+import webapp.model.UserMongo;
+import webapp.repository.UserRepositoryJPA;
+import webapp.repository.UserRepositoryMongo;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
 
 	@Autowired
-	private UserRepository userRepository;
+	private UserRepositoryMongo userRepository;
 	
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userRepository.findByUsername(username);
+		UserMongo user = userRepository.findByUsername(username);
 		if(user == null) throw new UsernameNotFoundException(username);
 		
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-		for(Role role : user.getRoles()) {
+		for(RoleMongo role : user.getRoles()) {
 			grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
 		}
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);

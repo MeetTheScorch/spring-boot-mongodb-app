@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import webapp.model.User;
+import webapp.model.UserJPA;
+import webapp.model.UserMongo;
 import webapp.service.UserService;
 import webapp.validator.ProfileUpdateValidator;
 
@@ -25,20 +27,20 @@ public class ProfilePageController {
 	@GetMapping(value = "/profile")
 	public String profile(Model model, Authentication authentication, String error) {
 		
-		User currentUser = userService.findByUsername(authentication.getName());	
+		UserMongo currentUser = userService.findByUsername(authentication.getName());	
 		model.addAttribute("name", currentUser.getUsername());
 		model.addAttribute("email", currentUser.getEmail());
 		
-		model.addAttribute("userForm", new User());
+		model.addAttribute("userForm", new UserJPA());
 		
 		return "profile";
 	}
 	
 	@PostMapping(value = "/profile")
-	public String updateProfile(@ModelAttribute("userForm") User userForm,
+	public String updateProfile(@ModelAttribute("userForm") UserMongo userForm,
 			BindingResult bindingResult, Model model, Authentication authentication) {
 		
-		User currentUser = userService.findByUsername(authentication.getName());	
+		UserMongo currentUser = userService.findByUsername(authentication.getName());	
 		model.addAttribute("name", currentUser.getUsername());
 		model.addAttribute("email", currentUser.getEmail());
 		

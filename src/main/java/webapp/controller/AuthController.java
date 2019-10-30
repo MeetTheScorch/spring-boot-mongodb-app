@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import webapp.model.User;
+import webapp.model.UserJPA;
+import webapp.model.UserMongo;
 import webapp.service.SecurityService;
 import webapp.service.UserService;
 import webapp.validator.UserCreateValidator;
@@ -27,12 +28,12 @@ public class AuthController {
 	
 	@GetMapping("/registration")
 	public String registration(Model model) {
-		model.addAttribute("userForm", new User());
+		model.addAttribute("userForm", new UserMongo());
 		return "registration";
 	}
 	
 	@PostMapping("/registration")
-	public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
+	public String registration(@ModelAttribute("userForm") UserMongo userForm, BindingResult bindingResult) {
 		userCreateValidator.validate(userForm, bindingResult);
 		
 		if(bindingResult.hasErrors()) {

@@ -1,26 +1,29 @@
 package webapp.service;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 import webapp.model.User;
+import webapp.model.UserJPA;
+import webapp.model.UserMongo;
 
 public interface UserService {
 	
-	ArrayList<User> findAll();
+	ArrayList<UserMongo> findAll();
 	
-	User findById(String id);
+	UserMongo findById(BigInteger id);
 	
-	User findByUsername(String username);
+	UserMongo findByUsername(String username);
 	
-	User findByEmail(String email);
+	UserMongo findByEmail(String email);
 	
-	User create(User user);
+	UserMongo create(UserMongo user);
 	
-	User update(User user);
+	UserMongo update(UserMongo user);
 	
-	User updatePassword(User user);
+	UserMongo updatePassword(UserMongo user);
 	
-	void delete(User user);
+	void delete(UserMongo user);
 	
-	void deleteById(String id);
+	void deleteById(BigInteger id);
 }

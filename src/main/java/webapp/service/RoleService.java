@@ -1,22 +1,25 @@
 package webapp.service;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 import webapp.model.Role;
+import webapp.model.RoleJPA;
+import webapp.model.RoleMongo;
 
 public interface RoleService {
 	
-	ArrayList<Role> findAll();
+	ArrayList<RoleMongo> findAll();
 	
-	Role findById(String id);
+	RoleMongo findById(BigInteger id);
 
-	Role findByName(String name);
+	RoleMongo findByName(String name);
 	
-	Role create(Role role);
+	RoleMongo create(RoleMongo role);
 	
-	Role update(Role role);
+	RoleMongo update(RoleMongo role);
 	
-	void delete(Role role);
+	void delete(RoleMongo role);
 	
-	void deleteById(String id);
+	void deleteById(BigInteger id);
 }

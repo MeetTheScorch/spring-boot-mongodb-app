@@ -7,7 +7,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import webapp.model.User;
+import webapp.model.UserJPA;
 import webapp.service.UserService;
 
 @Component
@@ -18,12 +18,12 @@ public class UserCreateValidator implements Validator{
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return User.class.equals(clazz);
+		return UserJPA.class.equals(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		User user = (User) target;
+		UserJPA user = (UserJPA) target;
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
 		if(user.getUsername().length() < 4 || user.getUsername().length() > 32) {

@@ -24,17 +24,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests()
-		.antMatchers("/", "/login", "/registration", "/css/**", "/js/**")
+		http
+			.authorizeRequests()
+			.antMatchers("/", "/login", "/registration", "/css/**", "/js/**")
 			.permitAll()
-		.antMatchers("/profile")
+		.and()
+			.authorizeRequests()
+			.antMatchers("/profile")
 			.authenticated()
-		.antMatchers("/user")
+		.and()
+			.authorizeRequests()
+			.antMatchers("/user")
 			.hasAuthority("USER")
-		.antMatchers("/admin")
+		.and()
+			.authorizeRequests()
+			.antMatchers("/admin")
 			.hasAuthority("ADMIN")
-		.antMatchers("/db/**")
+		.and()
+			.authorizeRequests()
+			.antMatchers("/db/**")
 			.hasAnyAuthority("ADMIN")
+		.and()
+			.authorizeRequests()
+			.antMatchers("/h2-console/**")
+			.permitAll()
 		.and()
 			.formLogin()
 			.loginPage("/login")
@@ -47,6 +60,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		.and()
 	        .exceptionHandling()
 	        .accessDeniedHandler(accessDeniedHandler);
+		
+		http.csrf().disable();
+        http.headers().frameOptions().disable();
 	}
 	
 	@Bean
